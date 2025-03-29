@@ -1,0 +1,66 @@
+{
+  "codigo": "000",
+  "mensagem": "Sucesso",
+  "placa": "FUD5J98",
+  "chassi": "3N1BB7ADXHY200644",
+  "ufJurisdicao": "SP",
+  "nomeMunicipioEmplacamento": "VALINHOS",
+  "anoFabricacao": 2016,
+  "anoModelo": 2017,
+  "marca": "I",
+  "modelo": "NISSAN SENTRA 20SV CVT",
+  "tipoVeiculo": "Automovel",
+  "tipoCarroceria": "NAO APLICAVEL",
+  "numeroCarroceria": "",
+  "corPredominante": "Cinza",
+  "combustivel": "ALCOOL/GASOLINA",
+  "potencia": 140,
+  "cilindradas": 1997,
+  "capacidadePassageiros": 5,
+  "numeroCaixaCambio": "",
+  "numeroEixos": 2,
+  "numeroMotor": "MR20980798H",
+  "dataEmplacamento": "09092016",
+  "quantidadeAquisicoes": 8,
+  "dataUltimaAquisicao": null,
+  "ufUltimaAquisicao": "SP",
+  "ufAtual": "SP",
+  "nomeMunicipioUltimaAquisicao": "MOGI DAS CRUZES",
+  "indicadoresFipe": [
+    {
+      "codigoFIPE": "023123-1",
+      "valores": [
+        {
+          "valorFIPE": "67388.0",
+          "dataConsulta": "03/2025",
+          "nomenclaturaFIPE": "Nissan-Sentra SV 2.0 FlexStart 16V Aut.",
+          "indiceComparacao": "0.50",
+          "desvalorizacao": "true"
+        },
+        {
+          "valorFIPE": "67727.0",
+          "dataConsulta": "02/2025",
+          "nomenclaturaFIPE": "Nissan-Sentra SV 2.0 FlexStart 16V Aut.",
+          "indiceComparacao": "2.04",
+          "desvalorizacao": "false"
+        },
+        {
+          "valorFIPE": "66373.0",
+          "dataConsulta": "01/2025",
+          "nomenclaturaFIPE": "Nissan-Sentra SV 2.0 FlexStart 16V Aut.",
+          "indiceComparacao": "3.50",
+          "desvalorizacao": "false"
+        }
+      ]
+    }
+  ],
+  "indicadoresMolicar": [
+    {
+      "codigo": "03701339-7",
+      "descricao": "NISSAN SENTRA SV N.GERACAO 2.0 16V CVT FLEXSTART 4P Eta./Gas."
+    }
+  ],
+  "indicadoresIcarros": [
+
+  ]
+}
