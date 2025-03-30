@@ -45,18 +45,27 @@ public class VehicleService {
     }
 
     private static void validateDates(VehicleData vehicleData) {
-        boolean hasInvalidDates = vehicleData.getFipeIndicators().stream()
-                .flatMap(fipe -> fipe.getValues().stream())
-                .map(FipeIndicatorData::getSearchDate)
-                .anyMatch(date -> !DateUtils.isValidDate(date))
-                || vehicleData.getIcarrosIndicators().stream()
-                        .map(IcarrosIndicator::getSearchMonth)
-                        .anyMatch(date -> !DateUtils.isValidDate(date));
+        boolean hasInvalidDates = false;
+
+        if (vehicleData.getFipeIndicators() != null) {
+            hasInvalidDates = vehicleData.getFipeIndicators().stream()
+                    .filter(fipe -> fipe.getValues() != null)
+                    .flatMap(fipe -> fipe.getValues().stream())
+                    .map(FipeIndicatorData::getSearchDate)
+                    .anyMatch(DateUtils::isInvalidDate);
+        }
+
+        if (vehicleData.getIcarrosIndicators() != null) {
+            hasInvalidDates |= vehicleData.getIcarrosIndicators().stream()
+                    .map(IcarrosIndicator::getSearchMonth)
+                    .anyMatch(DateUtils::isInvalidDate);
+        }
 
         if (hasInvalidDates) {
             throw new ValidationFailedException(new ProcessErrorDto(ProcessErrorType.INVALID_DATE_FORMAT));
         }
     }
+
 
     private static void validateLicensePlate(VehicleData vehicleData) {
         if (vehicleData.getLicensePlate() == null || vehicleData.getLicensePlate().isBlank()) {

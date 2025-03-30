@@ -11,7 +11,7 @@ public class DateUtils {
         return date.matches(DATE_PATTERN);
     }
 
-    public static boolean isValidDate(String date) {
-        return date != null && date.matches(DATE_PATTERN);
+    public static boolean isInvalidDate(String date) {
+        return date == null || !date.matches(DATE_PATTERN);
     }
 }
