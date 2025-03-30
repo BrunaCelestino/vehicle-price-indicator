@@ -1,6 +1,5 @@
 package br.com.bk.vehicle.price.indicator.infrastructure.repositories;
 
-import br.com.bk.vehicle.price.indicator.application.usecases.VehicleDataProcessUseCase;
 import br.com.bk.vehicle.price.indicator.domain.entities.FipeIndicatorDataEntity;
 import br.com.bk.vehicle.price.indicator.domain.entities.FipeIndicatorEntity;
 import br.com.bk.vehicle.price.indicator.domain.entities.IcarrosIndicatorEntity;
@@ -12,12 +11,10 @@ import br.com.bk.vehicle.price.indicator.domain.models.IcarrosIndicator;
 import br.com.bk.vehicle.price.indicator.domain.models.MolicarIndicator;
 import br.com.bk.vehicle.price.indicator.domain.models.VehicleData;
 import br.com.bk.vehicle.price.indicator.domain.repositories.VehicleJpaRepository;
-import br.com.bk.vehicle.price.indicator.domain.services.VehicleService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import java.util.List;

@@ -4,17 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class JsonUtilsTest {
-
-    private JsonUtils jsonUtils;
 
     @Test
     void when_beautifyJson_shouldThrowError() throws JsonProcessingException {
@@ -25,7 +20,7 @@ class JsonUtilsTest {
         when(mockObjectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(any()))
                 .thenThrow(new RuntimeException("Simulated IOException"));
 
-        JsonUtils.OBJECT_MAPPER = mockObjectMapper;
+        JsonUtils.objectMapper = mockObjectMapper;
 
         String result = JsonUtils.beautifyJson("{ 'key' : 'value' ");
 

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class ValidationFailedException extends RuntimeException {
-    private final ProcessErrorDto processErrorDto;
+    private final transient ProcessErrorDto processErrorDto;
 
     public ValidationFailedException(ProcessErrorDto processErrorDto) {
         super(processErrorDto.getDetails());

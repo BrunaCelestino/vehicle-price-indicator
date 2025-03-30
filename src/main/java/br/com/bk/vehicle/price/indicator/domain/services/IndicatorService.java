@@ -6,6 +6,7 @@ import br.com.bk.vehicle.price.indicator.domain.models.VehicleData;
 import br.com.bk.vehicle.price.indicator.domain.models.VehiclePriceIndicator;
 import br.com.bk.vehicle.price.indicator.domain.types.PriceIndicatorType;
 import br.com.bk.vehicle.price.indicator.domain.types.ProcessErrorType;
+import br.com.bk.vehicle.price.indicator.infrastructure.logger.LOG;
 import br.com.bk.vehicle.price.indicator.infrastructure.repositories.VehicleRepository;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,12 +30,14 @@ public class IndicatorService {
         VehicleData vehicleData = vehicleRepository.findByLicensePlate(licensePlate);
 
         if (vehicleData == null) {
+            LOG.warn("Veículo não encontrado.");
             throw new EntityNotFoundException(new ProcessErrorDto(ProcessErrorType.VEHICLE_NOT_FOUND, licensePlate));
         }
 
         List<VehiclePriceIndicator>  vehiclePriceIndicators = getVehiclePriceIndicators(vehicleData, date, type);
 
         if (vehiclePriceIndicators.isEmpty()) {
+            LOG.warn("Indicador não encontrado.");
             throw new EntityNotFoundException(new ProcessErrorDto(ProcessErrorType.INDICATOR_NOT_FOUND));
 
         }

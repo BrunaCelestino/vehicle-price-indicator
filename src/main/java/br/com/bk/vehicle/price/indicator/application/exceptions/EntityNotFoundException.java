@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 public class EntityNotFoundException extends RuntimeException {
-    private final ProcessErrorDto processErrorDto;
+    private final transient ProcessErrorDto processErrorDto;
 
     public EntityNotFoundException(ProcessErrorDto processErrorDto) {
         super(processErrorDto.getDetails());

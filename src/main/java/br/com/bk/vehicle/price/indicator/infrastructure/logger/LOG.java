@@ -25,8 +25,8 @@ public class LOG {
         log(ERROR, message);
     }
 
-    public static void log(Level level, String message, Object... args) {
+    private static void log(Level level, String message, Object... args) {
         Logger log = LoggerFactory.getLogger("root");
-        log.atLevel(level).log(String.format(message, args));
+        log.atLevel(level).log(message == null ? null : String.format(message, args));
     }
 }

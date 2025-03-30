@@ -62,6 +62,7 @@ public class VehicleService {
         }
 
         if (hasInvalidDates) {
+            LOG.warn("Erro ao validar datas.");
             throw new ValidationFailedException(new ProcessErrorDto(ProcessErrorType.INVALID_DATE_FORMAT));
         }
     }
@@ -69,6 +70,7 @@ public class VehicleService {
 
     private static void validateLicensePlate(VehicleData vehicleData) {
         if (vehicleData.getLicensePlate() == null || vehicleData.getLicensePlate().isBlank()) {
+            LOG.warn("Placa não informada.");
             throw new ValidationFailedException(new ProcessErrorDto(
                     ProcessErrorType.REQUIRED_INFORMATION_MISSING, "placa"));
         }
@@ -78,6 +80,7 @@ public class VehicleService {
         try {
             repository.save(vehicleData);
         } catch (DataIntegrityViolationException e) {
+            LOG.warn("Erro ao salvar veículo: " + e.getMessage());
             throw new EntityAlreadyExistsException(new ProcessErrorDto(ProcessErrorType.VEHICLE_ALREADY_REGISTERED));
         }
     }
