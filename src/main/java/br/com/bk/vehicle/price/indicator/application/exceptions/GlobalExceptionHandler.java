@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
         List<ProcessErrorDto> errors = new ArrayList<>();
         errors.add(ex.getProcessErrorDto());
 
-        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(errors, HttpStatus.CONFLICT);
     }
 
     @ExceptionHandler(ValidationFailedException.class)
