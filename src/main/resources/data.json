@@ -61,6 +61,29 @@
     }
   ],
   "indicadoresIcarros": [
-
+    {
+      "codigoICARROS": "26099",
+      "valorICARROS": "67006.31",
+      "mesConsulta": "02/2025",
+      "nomenclaturaICARROS": "Sentra SV 2.0 16V CVT (Flex)",
+      "indiceComparacao": "3.41",
+      "desvalorizacao": "false"
+    },
+    {
+      "codigoICARROS": "26099",
+      "valorICARROS": "64798.66",
+      "mesConsulta": "01/2025",
+      "nomenclaturaICARROS": "Sentra SV 2.0 16V CVT (Flex)",
+      "indiceComparacao": "2.80",
+      "desvalorizacao": "false"
+    },
+    {
+      "codigoICARROS": "26099",
+      "valorICARROS": "63033.42",
+      "mesConsulta": "12/2024",
+      "nomenclaturaICARROS": "Sentra SV 2.0 16V CVT (Flex)",
+      "indiceComparacao": "1.86",
+      "desvalorizacao": "true"
+    }
   ]
 }

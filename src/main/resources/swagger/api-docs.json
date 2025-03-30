@@ -1,0 +1,441 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Vehicle Price Indicator API",
+    "description": "Project for storing and retrieving vehicle information and price indicators.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Indicators API",
+      "description": "Gerencia informações de indicadores de preços"
+    },
+    {
+      "name": "Vehicle API",
+      "description": "Gerencia informações de veículos"
+    }
+  ],
+  "paths": {
+    "/v1/vehicles": {
+      "post": {
+        "tags": [
+          "Vehicle API"
+        ],
+        "summary": "Cadastrar as informações de veículos.",
+        "description": "Retorna a confirmação do cadastro.",
+        "operationId": "saveVehicleData",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VehicleDataDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Veículo cadastrado com sucesso.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleSavedDto"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação dos dados do veículo.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProcessErrorDto"
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Veículo já cadastrado com a placa informada.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProcessErrorDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro no processamento da aplicação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProcessErrorDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/v1/indicators": {
+      "get": {
+        "tags": [
+          "Indicators API"
+        ],
+        "summary": "Buscar informações sobre indicadores de preço de veículos.",
+        "description": "Retorna os indicadores de acordo com os filtros informados.",
+        "operationId": "getVehicleIndicators",
+        "parameters": [
+          {
+            "name": "licensePlate",
+            "in": "query",
+            "description": "Placa do veículo para o qual os indicadores serão buscados.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "Data do indicador buscado.",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "03/2025"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Tipo do indicador buscado. ALL: Todos os tipos. BOTH: Somente se houver indicadores Fipe e Icarros. FIPE: Somente indicador Fipe. ICARROS: Somente indicador Icarros.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "ALL",
+              "description": "Tipo de indicador de preço",
+              "enum": [
+                "FIPE",
+                "ICARROS",
+                "ALL",
+                "BOTH"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicador localizado com sucesso.",
+            "content": {
+              "*/*": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehiclePriceIndicatorDto"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro de validação dos filtros informados.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProcessErrorDto"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Indicador não localizado.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProcessErrorDto"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro no processamento da aplicação.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ProcessErrorDto"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "FipeIndicatorDataDto": {
+        "type": "object",
+        "properties": {
+          "valorFIPE": {
+            "type": "string"
+          },
+          "dataConsulta": {
+            "type": "string"
+          },
+          "nomenclaturaFIPE": {
+            "type": "string"
+          },
+          "indiceComparacao": {
+            "type": "string"
+          },
+          "desvalorizacao": {
+            "type": "string"
+          }
+        }
+      },
+      "FipeIndicatorDto": {
+        "type": "object",
+        "properties": {
+          "codigoFIPE": {
+            "type": "string"
+          },
+          "valores": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FipeIndicatorDataDto"
+            }
+          }
+        }
+      },
+      "IcarrosIndicatorDto": {
+        "type": "object",
+        "properties": {
+          "codigoICARROS": {
+            "type": "string"
+          },
+          "valorICARROS": {
+            "type": "string"
+          },
+          "mesConsulta": {
+            "type": "string"
+          },
+          "nomenclaturaICARROS": {
+            "type": "string"
+          },
+          "indiceComparacao": {
+            "type": "string"
+          },
+          "desvalorizacao": {
+            "type": "string"
+          }
+        }
+      },
+      "MolicarIndicatorDto": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "descricao": {
+            "type": "string"
+          }
+        }
+      },
+      "VehicleDataDto": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string"
+          },
+          "mensagem": {
+            "type": "string"
+          },
+          "placa": {
+            "type": "string"
+          },
+          "chassi": {
+            "type": "string"
+          },
+          "ufJurisdicao": {
+            "type": "string"
+          },
+          "nomeMunicipioEmplacamento": {
+            "type": "string"
+          },
+          "anoFabricacao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "anoModelo": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "marca": {
+            "type": "string"
+          },
+          "modelo": {
+            "type": "string"
+          },
+          "tipoVeiculo": {
+            "type": "string"
+          },
+          "tipoCarroceria": {
+            "type": "string"
+          },
+          "numeroCarroceria": {
+            "type": "string"
+          },
+          "corPredominante": {
+            "type": "string"
+          },
+          "combustivel": {
+            "type": "string"
+          },
+          "potencia": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cilindradas": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "capacidadePassageiros": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroCaixaCambio": {
+            "type": "string"
+          },
+          "numeroEixos": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numeroMotor": {
+            "type": "string"
+          },
+          "dataEmplacamento": {
+            "type": "string"
+          },
+          "quantidadeAquisicoes": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "dataUltimaAquisicao": {
+            "type": "string"
+          },
+          "ufUltimaAquisicao": {
+            "type": "string"
+          },
+          "ufAtual": {
+            "type": "string"
+          },
+          "nomeMunicipioUltimaAquisicao": {
+            "type": "string"
+          },
+          "indicadoresFipe": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FipeIndicatorDto"
+            }
+          },
+          "indicadoresMolicar": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MolicarIndicatorDto"
+            }
+          },
+          "indicadoresIcarros": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/IcarrosIndicatorDto"
+            }
+          }
+        }
+      },
+      "ProcessErrorDto": {
+        "type": "object",
+        "description": "Estrutura para retorno de erro da API",
+        "properties": {
+          "title": {
+            "type": "string",
+            "description": "Título do erro",
+            "example": "GENERAL_ERROR"
+          },
+          "code": {
+            "type": "string",
+            "description": "Código do erro",
+            "example": "CPI0001"
+          },
+          "details": {
+            "type": "string",
+            "description": "Detalhes do erro",
+            "example": "Erro no processamento da aplicação."
+          }
+        }
+      },
+      "VehicleSavedDto": {
+        "type": "object",
+        "description": "Estrutura para retorno do cadastro de veículos na API",
+        "properties": {
+          "placa": {
+            "type": "string",
+            "description": "Placa do veículo",
+            "example": "ABC1D23"
+          },
+          "registradoEm": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Data de registro do veículo",
+            "example": "2023-10-01T12:00:00Z"
+          }
+        }
+      },
+      "VehiclePriceIndicatorDto": {
+        "type": "object",
+        "description": "Estrutura para retorno da busca de indicadores de preço na API",
+        "properties": {
+          "valorFIPE": {
+            "type": "string",
+            "description": "Valor do veículo segundo a tabela FIPE",
+            "example": 50000
+          },
+          "valorICARROS": {
+            "type": "string",
+            "description": "Valor do veículo segundo o site Icarros",
+            "example": 52000
+          },
+          "data": {
+            "type": "string",
+            "description": "Data de referência do valor",
+            "example": "03/2023"
+          }
+        }
+      }
+    }
+  }
+}
