@@ -24,9 +24,9 @@ Este projeto oferece uma API para armazenar e recuperar informações sobre veí
 
 ## Visão Geral
 
-O **Vehicle Price Indicator** é uma API desenvolvida com o objetivo de fornecer informações detalhadas sobre veículos e seus respectivos preços. Através dessa API, é possível cadastrar veículos e consultar seus indicadores de preços, como os preços de mercado baseados em fontes confiáveis, como a Tabela Fipe e Icarros.
+O **Vehicle Price Indicator** é uma API desenvolvida com o objetivo de fornecer informações detalhadas sobre veículos e seus respectivos preços. Através dessa API, é possível cadastrar veículos e consultar seus indicadores de preços, como os preços de mercado baseados em fontes como a Tabela Fipe e Icarros.
 
-A aplicação segue os princípios de **Clean Architecture** e **SOLID**, garantindo uma estrutura modular, de fácil manutenção e expansão. A API também é otimizada para a consulta rápida de dados de veículos, permitindo fácil integração com sistemas externos.
+A aplicação segue os princípios de **Clean Architecture** e **SOLID**, garantindo uma estrutura modular, de fácil manutenção e expansão.
 
 
 ## Tecnologias Utilizadas
@@ -34,8 +34,8 @@ A aplicação segue os princípios de **Clean Architecture** e **SOLID**, garant
 - **Java 17**
 - **Spring Boot 3.4.4**
 - **Spring Data JPA**
-- **H2 Database (para desenvolvimento e testes)**
-- **Mockito (para testes unitários)**
+- **H2 Database** (para desenvolvimento e testes)
+- **Mockito** (para testes unitários)
 - **Swagger UI** (para documentação da API)
 - **Lombok** (para simplificação do código)
 
@@ -61,7 +61,7 @@ Exemplos:
 - **DTOs**: `VehiclePriceIndicatorDto`, `VehicleSavedDto`
 
 #### 3. **Camada de Infraestrutura**
-A camada de infraestrutura lida com a interação do sistema com recursos externos, como bancos de dados, APIs externas, e outros sistemas. A infraestrutura é responsável por fornecer a implementação concreta de repositórios e adaptadores.
+A camada de infraestrutura lida com a interação do sistema com recursos externos, como bancos de dados. A infraestrutura é responsável por fornecer a implementação concreta de repositórios e adaptadores.
 
 Exemplos:
 - **Adaptadores**: `FipeIndicatorAdapter`, `IcarrosIndicatorAdapter`, `MolicarIndicatorAdapter`
@@ -180,7 +180,7 @@ A Clean Architecture permite que o sistema seja facilmente adaptado a mudanças.
 
 ### 1. **Princípio da Responsabilidade Única (SRP)**
 
-Cada classe no projeto é responsável por uma única tarefa ou operação. Por exemplo, a classe `VehiclePriceIndicatorUseCase` tem como única responsabilidade a lógica para calcular o preço do veículo, enquanto `VehicleController` lida apenas com a interface de entrada (requisições HTTP). Isso assegura que qualquer modificação em uma classe só afete a funcionalidade relacionada, evitando efeitos colaterais.
+Cada classe no projeto é responsável por uma única tarefa ou operação. Por exemplo, a classe `VehiclePriceIndicatorUseCase` tem como única responsabilidade a lógica para encontrar o preço do veículo, enquanto `VehicleController` lida apenas com a interface de entrada (requisições HTTP). Isso assegura que qualquer modificação em uma classe só afete a funcionalidade relacionada, evitando efeitos colaterais.
 
 ### 2. **Princípio do Aberto/Fechado (OCP)**
 
