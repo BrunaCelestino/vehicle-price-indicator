@@ -59,7 +59,7 @@ class VehicleControllerTest {
     }
 
     @Test
-    void when_saveVehicleData_vehicleAlreadyExists_ShouldReturnBadRequestStatus() throws Exception {
+    void when_saveVehicleData_vehicleAlreadyExists_ShouldReturnConflictStatus() throws Exception {
         when(vehicleDataProcessInputPort.processVehicleData(any(VehicleDataDto.class)))
                 .thenThrow(new EntityAlreadyExistsException(new ProcessErrorDto(ProcessErrorType
                         .VEHICLE_ALREADY_REGISTERED)));
@@ -67,7 +67,7 @@ class VehicleControllerTest {
         mockMvc.perform(post("/v1/vehicles")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(getJson()))
-                .andExpect(status().isBadRequest())
+                .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.length()").value(1))
                 .andExpect(jsonPath("$[0].title").value(ProcessErrorType.VEHICLE_ALREADY_REGISTERED.name()))
                 .andExpect(jsonPath("$[0].code").value(ProcessErrorType.VEHICLE_ALREADY_REGISTERED.getCode()))
@@ -93,7 +93,7 @@ class VehicleControllerTest {
     }
 
     @Test
-    void when_saveVehicleData_genericException_ShouldReturnBadRequestStatus() throws Exception {
+    void when_saveVehicleData_genericException_ShouldReturnInternalServerErrorStatus() throws Exception {
         when(vehicleDataProcessInputPort.processVehicleData(any(VehicleDataDto.class)))
                 .thenThrow(new RuntimeException());
 
